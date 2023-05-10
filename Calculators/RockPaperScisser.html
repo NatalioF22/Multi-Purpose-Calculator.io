@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Rock Paper Scissors</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<style>
+		.container {
+			margin-top: 50px;
+			text-align: center;
+		}
+
+		h1 {
+			margin-bottom: 50px;
+		}
+
+		img {
+			width: 150px;
+			height: 150px;
+			margin: 10px;
+			cursor: pointer;
+		}
+
+		.result {
+			font-size: 2em;
+			font-weight: bold;
+			margin-top: 50px;
+		}
+	</style>
+</head>
+<body class="bg-danger">
+	<div class="container">
+		<h1>Rock Paper Scissors</h1>
+		<div>
+			<img id="rock" src="https://img.icons8.com/ios/452/hand-rock.png" alt="Rock">
+			<img id="paper" src="https://img.icons8.com/ios/452/hand.png" alt="Paper">
+			<img id="scissors" src="https://img.icons8.com/ios/452/hand-scissors.png" alt="Scissors">
+		</div>
+		<div class="result"></div>
+	</div>
+
+	<footer>
+        <div class="text-center mt-5" style="text-align: center;width:100%;margin-top:20px;margin-bottom:20px">
+                Copyright &copy; 2023 by Natalio Gomes
+        </div>
+    </footer>
+	<script>
+		// Define images
+		var rockImg = document.getElementById("rock");
+		var paperImg = document.getElementById("paper");
+		var scissorsImg = document.getElementById("scissors");
+
+		// Add event listeners to images
+		rockImg.addEventListener("click", function() {
+			playGame("rock");
+		});
+		paperImg.addEventListener("click", function() {
+			playGame("paper");
+		});
+		scissorsImg.addEventListener("click", function() {
+			playGame("scissors");
+		});
+
+		// Define function to play the game
+		function playGame(playerChoice) {
+			// Generate random computer choice
+			var computerChoice = Math.random();
+			if (computerChoice < 0.33) {
+				computerChoice = "rock";
+			} else if (computerChoice < 0.67) {
+				computerChoice = "paper";
+			} else {
+				computerChoice = "scissors";
+			}
+
+			// Determine winner
+			var result;
+			if (playerChoice === computerChoice) {
+				result = "Tie!";
+			} else if (playerChoice === "rock" && computerChoice === "scissors") {
+				result = "You win!";
+			} else if (playerChoice === "paper" && computerChoice === "rock") {
+				result = "You win!";
+			} else if (playerChoice === "scissors" && computerChoice === "paper") {
+				result = "You win!";
+			} else {
+				result = "Computer wins!";
+			}
+
+			// Display result
+			var resultDiv = document.querySelector(".result");
+			resultDiv.textContent = "You chose " + playerChoice + ", computer chose " + computerChoice + ". " + result;
+		}
+	</script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

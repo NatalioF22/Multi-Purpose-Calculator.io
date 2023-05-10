@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Currency Converter</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body class="bg-danger">
+    <div class="container">
+        <h1>Currency Converter</h1>
+        <div class="form-group">
+            <label for="fromCountry">From Country:</label>
+            <select class="form-control" id="fromCountry" onclick="generateOptions(fromCountry)" >
+                
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="toCountry">To Country:</label>
+            <select class="form-control" id="toCountry" onclick="generateOptions(toCountry)">
+              
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="amount">Amount:</label>
+            <input type="number" class="form-control" id="amount" placeholder="Enter amount">
+        </div>
+        <button type="button" class="btn btn-primary" onclick="convertCurrency()">Convert</button>
+        <div id="result"></div>
+    </div>
+    <script src="Assets/JS/converters.js"></script>
+    <script>
+        function convertCurrency() {
+            const fromCurrency = document.getElementById("fromCountry").value;
+            const toCurrency = document.getElementById("toCountry").value;
+            const amount = document.getElementById("amount").value;
+
+            const url = `https://api.exchangerate-api.com/v4/latest/${fromCurrency}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const rate = data.rates[toCurrency];
+                    const result = amount * rate;
+                    document.getElementById("result").innerHTML = `${amount} ${fromCurrency} = ${result} ${toCurrency}`;
+                })
+                .catch(error => console.error(error));
+        }
+
+        function generateOptions(selectElement) {
+            const currencies = [
+                { value: 'USD', label: 'US Dollar' },
+                { value: 'EUR', label: 'Euro' },
+                { value: 'GBP', label: 'British Pound' },
+                { value: 'JPY', label: 'Japanese Yen' },
+                { value: 'AUD', label: 'Australian Dollar' },
+                { value: 'CAD', label: 'Canadian Dollar' },
+                { value: 'CHF', label: 'Swiss Franc' },
+                { value: 'CNY', label: 'Chinese Yuan' },
+                { value: 'HKD', label: 'Hong Kong Dollar' },
+                { value: 'NZD', label: 'New Zealand Dollar' },
+                { value: 'SGD', label: 'Singapore Dollar' },
+                { value: 'THB', label: 'Thai Baht' },
+                { value: 'MXN', label: 'Mexican Peso' },
+                { value: 'BRL', label: 'Brazilian Real' },
+                { value: 'RUB', label: 'Russian Ruble' },
+                { value: 'INR', label: 'Indian Rupee' },
+                { value: 'KRW', label: 'South Korean Won' },
+                { value: 'TRY', label: 'Turkish Lira' },
+                { value: 'ZAR', label: 'South African Rand' },
+                { value: 'SAR', label: 'Saudi Riyal' },
+                { value: 'AED', label: 'United Arab Emirates Dirham' },
+                { value: 'QAR', label: 'Qatari Riyal' },
+                { value: 'EGP', label: 'Egyptian Pound' },
+                { value: 'IDR', label: 'Indonesian Rupiah' },
+                { value: 'PHP', label: 'Philippine Peso' },
+                { value: 'MYR', label: 'Malaysian Ringgit' },
+                { value: 'NGN', label: 'Nigerian Naira' },
+                { value: 'PKR', label: 'Pakistani Rupee' },
+                { value: 'CLP', label: 'Chilean Peso' },
+                { value: 'COP', label: 'Colombian Peso' },
+                { value: 'ARS', label: 'Argentine Peso' },
+                { value: 'ILS', label: 'Israeli New Shekel' },
+                { value: 'PLN', label: 'Polish Zloty' },
+                { value: 'HUF', label: 'Hungarian Forint' },
+                { value: 'RON', label: 'Romanian Leu' },
+                { value: 'SEK', label: 'Swedish Krona' },
+                { value: 'NOK', label: 'Norwegian Krone' },
+                { value: 'DKK', label: 'Danish Krone' },
+                { value: 'CZK', label: 'Czech Koruna' },
+                { value: 'CVE', label: 'Cape Verdean Escudo'},
+            ];
+
+            currencies.forEach(currency => {
+                const option = document.createElement('option');
+                option.value = currency.value;
+                option.textContent = currency.label;
+                selectElement.appendChild(option);
+            });
+            }
+
+            generateOptions(document.getElementById('fromCountry'));
+            generateOptions(document.getElementById('toCountry'));
+
+
+    </script>
+    <footer>
+        <div class="text-center mt-5" style="text-align: center;width:100%;margin-top:20px;margin-bottom:20px">
+                Copyright &copy; 2023 by Natalio Gomes
+        </div>
+    </footer>
+</body>
+</html>

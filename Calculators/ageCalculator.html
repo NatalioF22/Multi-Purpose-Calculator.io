@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Age Calculator</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Bootstrap JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<style>
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+		}
+	</style>
+</head>
+<body class="bg-danger" >
+    
+	<div class="container">
+		<h1>Age Calculator</h1>
+		<form style="width:500px">
+			<div class="form-group">
+				<label for="name">Your Name:</label>
+				<input type="text" class="form-control" id="name" placeholder="Enter your name">
+			</div>
+			<div class="form-group">
+				<label for="dob-day">Day of Birth:</label>
+				<input type="number" class="form-control" id="dob-day" placeholder="Enter day of birth">
+			</div>
+			<div class="form-group">
+				<label for="dob-month">Month of Birth:</label><br>
+				<select name="dob-month" id="dob-month" class="form-control">
+					<option value="1">January</option>
+					<option value="2">February</option>
+					<option value="3">March</option>
+					<option value="4">April</option>
+					<option value="5">May</option>
+					<option value="6">June</option>
+					<option value="7">July</option>
+					<option value="8">August</option>
+					<option value="9">September</option>
+					<option value="10">October</option>
+					<option value="11">November</option>
+					<option value="12">December</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="dob-year">Year of Birth:</label>
+				<input type="number" class="form-control" id="dob-year" placeholder="Enter year of birth">
+			</div>
+			<button type="button" class="btn btn-primary" onclick="calculateAge()">Submit</button>
+		</form>
+		<div id="result" style="margin-top: 20px;"></div>
+	</div>
+	<footer>
+        <div class="text-center mt-5" style="text-align: center;width:100%;margin-top:20px;margin-bottom:20px">
+                Copyright &copy; 2023 by Natalio Gomes
+        </div>
+    </footer>
+	<script>
+		function calculateAge() {
+			let name = document.getElementById('name').value;
+			let day = document.getElementById('dob-day').value;
+			let month = document.getElementById('dob-month').value;
+			let year = document.getElementById('dob-year').value;
+
+			let dob = new Date(year, month - 1, day);
+			let now = new Date();
+
+			let age = now.getFullYear() - dob.getFullYear();
+			let monthDiff = now.getMonth() - dob.getMonth();
+			if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < dob.getDate())) {
+				age--;
+			}
+
+			let result = document.getElementById('result');
+			result.innerHTML = name + ", you are " + age + " years old.";
+		}
+	</script>
+</body>
+</html>

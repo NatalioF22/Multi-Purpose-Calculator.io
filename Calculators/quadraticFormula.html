@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    
+    <title>Quadratic Formula</title>
+</head>
+<body class="bg-danger">
+    <div class="container-xxl text-center mx-auto my-5">
+        <input type="number" id="constatntA" style="width:60px">
+        <label for="" >X^2 + </label>
+
+        <input type="number" id="constatntB" style="width:60px">
+        <label for="">X + </label>
+        <input type="number" id="constatntC" style="width:60px"><br>
+        <label for="" id="result"></label><br>
+        <button type="button" class="btn btn-primary my-5" onclick="calculate()">Calculate</button>
+    </div>
+    <footer>
+        <div class="text-center mt-5" style="text-align: center;width:100%;margin-top:20px;margin-bottom:20px">
+            Copyright &copy; 2023 by Natalio Gomes
+        </div>
+    </footer>
+    <script>
+        function calculate(){
+            let numA = document.getElementById("constatntA").value;
+            let numB = document.getElementById("constatntB").value;
+            let numC = document.getElementById("constatntC").value;
+
+            // check if input values are valid integers
+            if (isNaN(numA) || isNaN(numB) || isNaN(numC)){
+                alert("Invalid input, please enter numbers only.");
+            }
+            else {
+                numA = parseFloat(numA);
+                numB = parseFloat(numB);
+                numC = parseFloat(numC);
+
+                let descriminant =  (numB*numB) - (4*numA*numC);
+                let root1 = (-numB + Math.sqrt(descriminant)/(2*numA));
+                let root2 = (-numB - Math.sqrt(descriminant)/(2*numA));
+                if (descriminant < 0){
+                    let result = document.getElementById("result").innerHTML = "No real roots.";
+                }
+                else{
+                    let result = document.getElementById("result").innerHTML = "Root 1: " +  root1 + "<br>"+ "Root 2: " + root2 + "<br>";
+                }
+            }
+        }
+    </script>
+    
+    <script src="Assets/JS/miscellaneous.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</body>
+</html>

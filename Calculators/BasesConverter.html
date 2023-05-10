@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Number Base Converter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body class="bg-danger">
+    <div class="container-xxl text-center" style="width:500px">
+
+        <h1>Number Base Converter</h1>
+        <p>Convert numbers from one base to another</p>
+        <form>
+            <div class="form-group">
+                <label for="inputNumber">Enter a number:</label>
+                <input type="text" class="form-control" id="inputNumber" placeholder="Enter a number">
+            </div>
+            <div class="form-group">
+                <label for="fromBase">From base:</label>
+                <select class="form-control" id="fromBase">
+                    <option value="2">Binary</option>
+                    <option value="8">Octal</option>
+                    <option value="10" selected>Decimal</option>
+                    <option value="16">Hexadecimal</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="toBase">To base:</label>
+                <select class="form-control" id="toBase">
+                    <option value="2">Binary</option>
+                    <option value="8">Octal</option>
+                    <option value="10">Decimal</option>
+                    <option value="16" selected>Hexadecimal</option>
+                </select>
+            </div>
+            <button type="button" class="btn btn-primary my-2" onclick="convertNumber()">Convert</button>
+            <div class="form-group">
+                <label for="outputNumber">Converted number:</label>
+                <input type="text" class="form-control" id="outputNumber" placeholder="Converted number" readonly>
+            </div>
+        </form>
+    </div>
+    <footer>
+        <div class="text-center mt-5" style="text-align: center;width:100%;margin-top:20px;margin-bottom:20px">
+                Copyright &copy; 2023 by Natalio Gomes
+        </div>
+    </footer>
+    <script>
+        function convertNumber() {
+    const fromBase = document.getElementById("fromBase").value;
+    const number = document.getElementById("inputNumber").value;
+    const toBase = document.getElementById("toBase").value;
+    
+    if(toBase == 10){
+    function toDecimal() {
+      let decimalValue = 0;
+      for (let i = number.length - 1; i >= 0; i--) {
+        const digitValue = parseInt(number[i], fromBase);
+        decimalValue += digitValue * Math.pow(fromBase, number.length - 1 - i);
+      }
+      return decimalValue;
+    }
+    let result = document.getElementById("outputNumber").value = toDecimal().toString(toBase);
+    console.log(toDecimal());
+  }
+  if(toBase == 2 ){
+    function toBinary() {
+      let binaryValue = 0;
+      for (let i = number.length - 1; i >= 0; i--) {
+        const digitValue = parseInt(number[i], fromBase);
+        binaryValue += digitValue * Math.pow(fromBase, number.length - 1 - i);
+      }
+      return binaryValue;
+    }
+    let result = document.getElementById("outputNumber").value = toBinary().toString(toBase);
+    console.log(toBinary());
+  }
+  if (toBase == 8) {
+    function toOctal() {
+      let octalValue = 0;
+      for (let i = number.length - 1; i >= 0; i--) {
+        const digitValue = parseInt(number[i], fromBase);
+        octalValue += digitValue * Math.pow(fromBase, number.length - 1 - i);
+      }
+    
+      return octalValue;
+    }
+    let result = document.getElementById("outputNumber").value = toOctal().toString(toBase);
+    console.log(toOctal());
+  }
+  if (toBase == 16) {
+    function toHexadecimal() {
+      let hexadecimalValue = 0;
+      for (let i = number.length - 1; i >= 0; i--) {
+        const digitValue = parseInt(number[i], fromBase);
+        hexadecimalValue += digitValue * Math.pow(fromBase, number.length - 1 - i);
+      }
+      
+      return hexadecimalValue;
+    }
+    let result = document.getElementById("outputNumber").value = toHexadecimal().toString(toBase);
+    console.log(toHexadecimal());
+  }
+}
+
+
+function toFahrenheit(){
+  let temperatureInput = document.getElementById("temperature");
+  const temperature = temperatureInput.value;
+  result = (temperature * 9/5) + 32;
+  temperatureInput.value = result;
+}
+
+function ToCelcius(){
+  let temperatureInput = document.getElementById("temperature");
+  const temperature = temperatureInput.value;
+  result = ((temperature -32)*5)/9;
+  temperatureInput.value = result;
+}
+
+
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+ 
+</body>
+</html>
